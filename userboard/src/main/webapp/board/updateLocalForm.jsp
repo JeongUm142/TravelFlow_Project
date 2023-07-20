@@ -41,7 +41,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>카테고리 수정</title>
+<title>UserBoard</title>
 </head>
 <body>
 <div class="container" style="text-align: center;">

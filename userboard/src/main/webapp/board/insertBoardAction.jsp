@@ -19,7 +19,7 @@
 		||request.getParameter("insertLocal").equals("")
 		||request.getParameter("insertTitle").equals("")
 		||request.getParameter("insertContext").equals("")) {
-	msg = URLEncoder.encode("게시물 내용을 모두 입력해주세요","utf-8");
+	msg = URLEncoder.encode("내용을 모두 입력해주세요","utf-8");
 	response.sendRedirect(request.getContextPath()+"/board/insertBoardForm.jsp?msg=" + msg);
 	return;
 	}

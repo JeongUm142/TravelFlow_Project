@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비밀번호 변경</title>
+<title>UserBoard</title>
 </head>
 <body>
 <div class="container" style="text-align: center;">

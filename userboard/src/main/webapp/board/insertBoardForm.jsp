@@ -56,7 +56,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>게시물 추가</title>
+	<title>UserBoard</title>
 	<!-- Latest compiled and minified CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	

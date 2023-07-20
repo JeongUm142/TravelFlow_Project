@@ -33,7 +33,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원탈퇴</title>
+<title>UserBoard</title>
 </head>
 <body>
 <div class="container" style="text-align: center;">
