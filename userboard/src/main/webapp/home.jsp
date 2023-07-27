@@ -107,17 +107,34 @@
 		String totalRowSql = null;
 		PreparedStatement totalStmt = null;
 		ResultSet totalRs = null;
-		totalRowSql = "SELECT count(*) FROM board";
-		totalStmt = conn.prepareStatement(totalRowSql);
-		totalRs = totalStmt.executeQuery();
-			//디버깅
-			System.out.println("totalStmt-->"+totalStmt);
-			System.out.println("totalRs-->"+totalRs);
-			
-		//전체 페이지수
-		if(totalRs.next()){
-			totalRow=totalRs.getInt("count(*)");
+		if(localName.equals("전체")) {
+			totalRowSql = "SELECT count(*) FROM board";
+			totalStmt = conn.prepareStatement(totalRowSql);
+			totalRs = totalStmt.executeQuery();
+				//디버깅
+				System.out.println("totalStmt-->"+totalStmt);
+				System.out.println("totalRs-->"+totalRs);
+				
+			//전체 행수
+			if(totalRs.next()){
+				totalRow = totalRs.getInt("count(*)");
+			}
+		} else{
+			totalRowSql = "SELECT count(*) FROM board WHERE local_name=?";
+			totalStmt = conn.prepareStatement(totalRowSql);
+			totalStmt.setString(1, localName);
+			totalRs = totalStmt.executeQuery();
+				//디버깅
+				System.out.println("totalStmt-->"+totalStmt);
+				System.out.println("totalRs-->"+totalRs);
+				
+			// 지역별 행수
+			if(totalRs.next()){
+				totalRow = totalRs.getInt("count(*)");
+				System.out.println("totalRow-->"+totalRow);
+			}
 		}
+		
 		int lastPage = totalRow/rowPerPage;
 		
 		//마지막 페이지가 나머지가 0이 아니면 페이지수 1추가
@@ -275,7 +292,7 @@
 	<ul class="pagination justify-content-center" style="margin:20px 0">
 		<%
 			//이전 페이지 버튼
-			if(currentPage > pageCount){
+			if(startPage > pageCount){
 		%>
 	   			<li class="page-item">
 	   				<a class="page-link text-dark" href="<%=request.getContextPath()%>/home.jsp?currentPage=<%=startPage-10 %>&localName=<%=localName%>">
@@ -304,7 +321,9 @@
 	       		}
 	        }
 	    	//다음 페이지 버튼
-	    	if(currentPage < (lastPage-pageCount+1)){
+	    	if(endPage < lastPage){
+	    		// System.out.println(endPage+"<--endPage");
+	    		// System.out.println(lastPage+"<--lastPage");
 	       %>
 			<li class="page-item">
 				<a class="page-link text-dark" href="<%=request.getContextPath()%>/home.jsp?currentPage=<%=endPage+1 %>&localName=<%=localName%>">
