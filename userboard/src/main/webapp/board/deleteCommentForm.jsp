@@ -3,6 +3,9 @@
 <%@ page import = "java.util.*"%>
 <%@ page import = "vo.*"%>
 <%
+	//인코딩 설정
+	request.setCharacterEncoding("utf-8");
+
 	//세션 유효성 검사
 	if(session.getAttribute("loginMemberId") == null) {
 	   response.sendRedirect(request.getContextPath()+"/home.jsp");
@@ -52,7 +55,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>UserBoard</title>
+	<title>TravelFlow</title>
+	<link href="<%=request.getContextPath()%>/img/boardfavicon.png" rel="icon">
 	<!-- Latest compiled and minified CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	
@@ -70,7 +74,7 @@
       <jsp:include page="/inc/mainmenu.jsp"></jsp:include>
 	</div>
 
-	<h1>게시물 수정</h1>
+	<h1>댓글 삭제</h1>
 <hr>
 	<%
 		if(request.getParameter("msg") != null) {
@@ -84,7 +88,8 @@
 			<tr>
 				<td class="table-warning">댓글 내용</td>
 				<td>
-					<input type="text" name="commentNo" hidden="hidden" value="<%=comment.getCommentNo()%>">
+					<input type="hidden" name="commentNo" value="<%=comment.getCommentNo()%>">
+					<input type="hidden" name="boardNo" value="<%=comment.getBoardNo()%>">
 					<input type ="text" name="comment" value="<%=comment.getCommentContent()%>" class="form-control form-control-sm" readonly>
 					</td>
 			</tr>
@@ -100,6 +105,10 @@
 		<a href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=comment.getBoardNo()%>" class="btn btn-sm btn-outline-dark">취소</a>
 		<button type="submit" class="btn btn-sm btn-outline-dark">삭제</button>
 	</form>
+</div>
+<div>
+	<!-- include 페이지 : Copyright &copy; 신정음 -->
+	<jsp:include page="/inc/copyright.jsp"></jsp:include>
 </div>
 </body>
 </html>

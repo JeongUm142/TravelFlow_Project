@@ -3,34 +3,41 @@
 <%@ page import = "java.net.*"%>
 <%@ page import = "vo.*" %>
 <%
+	//인코딩 설정
+	request.setCharacterEncoding("utf-8");
+
 	//1.세션 유효성검사 
 	if(session.getAttribute("loginMemberId") == null) {
 		response.sendRedirect(request.getContextPath()+"/home.jsp");
 		return;
 	}
 
+	//메시지
+	String msg = "";
+
+	int commentNo = Integer.parseInt(request.getParameter("commentNo"));
+	
 	//2.요청값 유효성검사
 	if(request.getParameter("createdateRe")==null 
 		|| request.getParameter("createdateRe").equals("")){
-		response.sendRedirect(request.getContextPath()+"/board/deleteCommentForm.jsp");
+		msg = URLEncoder.encode("작성일을 확인해주세요.(YYYY-MM-DD형식으로 입력)","utf-8");
+		response.sendRedirect(request.getContextPath()+"/board/deleteCommentForm.jsp?msg="+ msg+"&commentNo=" + commentNo);
 		return;
 		}
 	
-	int commentNo = Integer.parseInt(request.getParameter("commentNo"));
+	int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 	String createdate = request.getParameter("createdate");
 	String createdateRe = request.getParameter("createdateRe");
 		//디버깅
 		System.out.println(createdate + "<- 댓글 삭제 createdate");
 		System.out.println(createdateRe + "<- 댓글 삭제 createdateRe");
 		
-	//메시지
-	String msg = "";
 	
 	//지역명 일치 검사
 	if(!createdate.equals(createdateRe)){//비밀번호 오류
 		System.out.println("댓글 작성일 오류");
 		msg = URLEncoder.encode("작성일을 확인해주세요.(YYYY-MM-DD형식으로 입력)","utf-8");
-		response.sendRedirect(request.getContextPath()+"/board/deleteCommentForm.jsp?msg="+ msg);
+		response.sendRedirect(request.getContextPath()+"/board/deleteCommentForm.jsp?msg="+ msg+"&commentNo=" + commentNo);
 		return;
 	}
 	
@@ -76,10 +83,10 @@
 	
 	if(row == 1) {//성공 
 		System.out.println(row + "<--댓글삭제 성공");
-		response.sendRedirect(request.getContextPath()+"/boardOne.jsp?boardNo=");
+		response.sendRedirect(request.getContextPath()+"/board/boardOne.jsp?boardNo="+ boardNo);
 	} else {
 		System.out.println(row + "<--댓글삭제 실패");
-		response.sendRedirect(request.getContextPath()+"/board/deleteBoardForm.jsp");
+		response.sendRedirect(request.getContextPath()+"/board/deleteCommentForm.jsp?commentNo="+commentNo);
 		return;
 	}
 %>

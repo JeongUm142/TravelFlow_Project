@@ -55,7 +55,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>UserBoard</title>
+<title>TravelFlow</title>
+<link href="<%=request.getContextPath()%>/img/boardfavicon.png" rel="icon">
 </head>
 <body>
 <div class="container">
@@ -79,9 +80,6 @@
 	%>
 	<form action="<%=request.getContextPath()%>/board/deleteBoardAction.jsp?boardNo=<%=board.getBoardNo()%>">
 	<table class="table table-bordered" style="text-align: center; vertical-align: middle;">
-	<tr>
-		
-	</tr>
 		<tr>
 			<td style="width: 100px" class="table-warning" >지역</td>
 			<td><input type="text" value="<%=board.getLocalName()%>" class="form-control form-control-sm" disabled></td>
@@ -119,6 +117,10 @@
 	<a href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=board.getBoardNo()%>" class="btn btn-sm btn-outline-dark">취소</a>
 	<button type="submit" class="btn btn-sm btn-outline-dark">삭제</button>
 	</form>
+</div>
+<div>
+	<!-- include 페이지 : Copyright &copy; 신정음 -->
+	<jsp:include page="/inc/copyright.jsp"></jsp:include>
 </div>
 </body>
 </html>

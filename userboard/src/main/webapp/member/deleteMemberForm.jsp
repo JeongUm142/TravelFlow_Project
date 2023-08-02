@@ -15,7 +15,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>UserBoard</title>
+<title>TravelFlow</title>
+<link href="<%=request.getContextPath()%>/img/boardfavicon.png" rel="icon">
 </head>
 <body>
 <div class="container" style="text-align: center;">
@@ -38,7 +39,6 @@
 	<%
 		}
 	%>
-		
 	<form action="<%=request.getContextPath()%>/member/deleteMemberAction.jsp" method="post">
 		<table class="table table-bordered" style=" vertical-align: middle;">
 			<tr>
@@ -53,6 +53,10 @@
 		<a href="<%=request.getContextPath()%>/member/memberInfo.jsp" class="btn btn-sm btn-outline-dark">취소</a>
 		<button type="submit" class="btn btn-sm btn-outline-dark">회원탈퇴</button>
 	</form>
+</div>
+<div>
+	<!-- include 페이지 : Copyright &copy; 신정음 -->
+	<jsp:include page="/inc/copyright.jsp"></jsp:include>
 </div>
 </body>
 </html>

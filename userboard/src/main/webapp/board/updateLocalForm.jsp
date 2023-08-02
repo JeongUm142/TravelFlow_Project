@@ -41,7 +41,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>UserBoard</title>
+<title>TravelFlow</title>
+<link href="<%=request.getContextPath()%>/img/boardfavicon.png" rel="icon">
 </head>
 <body>
 <div class="container" style="text-align: center;">
@@ -92,6 +93,10 @@
 		<a href="<%=request.getContextPath()%>/board/category.jsp" class="btn btn-sm btn-outline-dark">취소</a>
 		<button type="submit" class="btn btn-sm btn-outline-dark">카테고리명 변경</button>
 	</form>
+</div>
+<div>
+	<!-- include 페이지 : Copyright &copy; 신정음 -->
+	<jsp:include page="/inc/copyright.jsp"></jsp:include>
 </div>
 </body>
 </html>

@@ -27,7 +27,15 @@
 			<br>
 			<br>
 
+			<%
+		if(session.getAttribute("loginMemberId") != null 
+			&& session.getAttribute("loginMemberId").equals("admin")
+			|| session.getAttribute("loginMemberId").equals("test")) { // 관리자
+	%>
 			<a href="<%=request.getContextPath()%>/board/category.jsp" class="btn btn-sm btn-outline-warning text-muted">카테고리 관리</a>
+	<%		
+		}
+	%>
 			<a href="<%=request.getContextPath()%>/member/logoutAction.jsp" class="btn btn-sm btn-outline-warning text-muted">로그아웃</a>	
 
 </div>

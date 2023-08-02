@@ -46,6 +46,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>UserBoard</title>
+	<link href="<%=request.getContextPath()%>/img/boardfavicon.png" rel="icon">
 	<!-- Latest compiled and minified CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	
@@ -78,6 +79,10 @@
 	<a href="<%=request.getContextPath()%>/member/updatePwForm.jsp" class="btn btn-sm btn-outline-dark">비밀번호 변경</a>
 	&nbsp;&nbsp;&nbsp;
 	<a href="<%=request.getContextPath()%>/member/deleteMemberForm.jsp" class="btn btn-sm btn-outline-dark">회원탈퇴</a>
+</div>
+<div>
+	<!-- include 페이지 : Copyright &copy; 신정음 -->
+	<jsp:include page="/inc/copyright.jsp"></jsp:include>
 </div>
 </body>
 </html>

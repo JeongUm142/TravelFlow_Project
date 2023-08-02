@@ -111,12 +111,14 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>UserBoard</title>
+	<title>TravelFlow</title>
+	<link href="<%=request.getContextPath()%>/img/boardfavicon.png" rel="icon">
 	<!-- Latest compiled and minified CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	
 	<!-- Latest compiled JavaScript -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	
 </head>
 <body>
 <div class="container">
@@ -208,20 +210,20 @@
 		for(Comment c : commentList) {
 		%>
 		<tr>
-			<td style="width: 46%"><%=c.getCommentContent()%></td>
+			<td style="width: 50%"><%=c.getCommentContent()%></td>
 			<td><%=c.getMemberId()%></td>
-			<td style="width: 10%"><%=c.getCreatedate()%></td>
-			<td style="width: 10%"><%=c.getUpdatedate()%></td>
+			<td style="width: 15%"><%=c.getCreatedate()%></td>
+			<td style="width: 15%"><%=c.getUpdatedate()%></td>
 			<%	//로그인 사용자만 댓글 입력허용
          if(session.getAttribute("loginMemberId") != null) {
         	 //현재 로그인 사용자의 아이디
         	 String loginMemberId = (String)session.getAttribute("loginMemberId");
         		if(loginMemberId.equals(c.getMemberId())) {
  			%>
-			<td style="width: 7%">
-				<a href="<%=request.getContextPath()%>/board/updateCommentForm.jsp?commentNo=<%=c.getCommentNo()%>"class="btn btn-sm btn-outline-dark">수정</a>
+			<td style="width: 5%">
+				<a href="<%=request.getContextPath()%>/board/updateCommentForm.jsp?commentNo=<%=c.getCommentNo()%>&boardNo=<%=boardNo%>" class="btn btn-sm btn-outline-dark">수정</a>
 			</td>
-			<td style="width: 7%">
+			<td style="width: 5%">
 				<a href="<%=request.getContextPath()%>/board/deleteCommentForm.jsp?commentNo=<%=c.getCommentNo()%>"class="btn btn-sm btn-outline-dark">삭제</a>
 			</td>
 		</tr>
@@ -231,26 +233,40 @@
 			}
 		%>
  	</table>
-		
-<div style="text-align: center;">
-	<%
-		if(currentPage>1){
-	%>
-	<a href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=boardNo%>&currentPage=<%=currentPage - 1%>" class="btn btn-sm btn-warning">이전
-	</a>
-	<%
-		}
-	%>
-		&nbsp;<%=currentPage%>&nbsp;
-	<%
-		if(currentPage<lastPage){
-	%>
-	<a href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=boardNo%>&currentPage=<%=currentPage + 1%>" class="btn btn-sm btn-warning">다음
-	</a>
-	<%
-		}
-	%>
+		<%
+		if(commentList.size() != 0){
+		System.out.println(commentList.size() + "commentList.size()");
+		%>
+			<div style="text-align: center;">
+				<%
+					if(currentPage>1){
+				%>
+				<a href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=boardNo%>&currentPage=<%=currentPage - 1%>" class="btn btn-sm btn-warning">이전
+				</a>
+				<%
+					}
+				%>
+					&nbsp;<%=currentPage%>&nbsp;
+				<%
+					if(currentPage<lastPage){
+				%>
+				<a href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=boardNo%>&currentPage=<%=currentPage + 1%>" class="btn btn-sm btn-warning">다음
+				</a>
+				<%
+					}
+				%>
+			</div>
+		<%
+			} else{
+		%>		
+			<div style="text-align: center; font-size: 20px; color:gray;">댓글이 없으면 외로워요🥺 첫 댓글의 기회를 잡아주세요!</div>
+		<%
+			}
+		%>
 </div>
+<div>
+	<!-- include 페이지 : Copyright &copy; 신정음 -->
+	<jsp:include page="/inc/copyright.jsp"></jsp:include>
 </div>
 </body>
 </html>

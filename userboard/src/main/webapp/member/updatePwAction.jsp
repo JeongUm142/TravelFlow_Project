@@ -3,6 +3,9 @@
 <%@ page import = "java.net.*"%>
 <%@ page import = "vo.*" %>
 <%
+	//인코딩 설정
+	request.setCharacterEncoding("utf-8");
+
 	//1.세션 유효성검사 
 	if(session.getAttribute("loginMemberId") == null) {
 		response.sendRedirect(request.getContextPath()+"/home.jsp");
@@ -53,7 +56,7 @@
 	int row = stmt.executeUpdate();
 	if(row == 1) {//성공 
 		System.out.println(row + "<--비밀번호 변경성공");
-		msg = URLEncoder.encode("비밀번호가 변경되었습니다. 다시 로그인해주시기 바랍니다.","utf-8");
+		msg = URLEncoder.encode("다시 로그인해주시기 바랍니다.","utf-8");
 		session.invalidate();//세션무효화
 		response.sendRedirect(request.getContextPath()+"/home.jsp?msg="+msg);
 	} else {

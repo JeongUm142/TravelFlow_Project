@@ -9,16 +9,16 @@
 	<%
 		if(session.getAttribute("loginMemberId") == null) { // 로그인전
 	%>
+	<br>
 	<div style="position: pixed; text-align: center;">
-		<a href="<%=request.getContextPath()%>/home.jsp" style="border: 10px solid #FAECC5; 
-			background:#FAECC5; display: block; text-decoration: none; color: #4C4C4C; font-size: 55px; ">
-		HOME
+		<a href="<%=request.getContextPath()%>/home.jsp" style="background:#FAECC5; display: block; text-decoration: none; color: #4C4C4C; font-size: 55px; height: 204px; width: 2000px'">
+		TRAVEL FLOW
 			<h6>2023.05.02~2023.05.15 
 			<br>Java17, HTML, CSS, MariaDB
 			<br>----------------------------
-			<br>로그인, 로그아웃, 회원가입, 회원정보 수정 
-			<br>게시글 댓글 카테고리 각 항목에 삽입, 삭제, 수정 기능 구현  
-			<br>게시글 목록 1~10 이동 기능을 포함한 페이징
+			<br>test 계정 
+			<br>ID : test
+			<br>PW : 1234
 			</h6>
 		</a>
 		
@@ -29,9 +29,8 @@
 	%>
 <br>
 <div style="position: pixed; text-align: center;">
-	<a href="<%=request.getContextPath()%>/home.jsp" style="border: 0px solid #FAECC5; 
-		background:#FAECC5; display: block; text-decoration: none; font-size: 55px">
-	<img src="<%=request.getContextPath()%>/img/bg.jpg" height="200px">
+	<a href="<%=request.getContextPath()%>/home.jsp" style=" display: block; text-decoration: none;">
+	<img src="<%=request.getContextPath()%>/img/bgB.png" height="204px" width="100%">
 	</a>
 <br>
 </div>

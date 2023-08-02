@@ -3,15 +3,23 @@
 <%@ page import = "java.net.*"%>  <!-- 인코딩 -->
 <%@ page import = "vo.*" %>
 <%
+	//인코딩 설정
+	request.setCharacterEncoding("utf-8");
+
 	//1.세션 유효성검사 
 	if(session.getAttribute("loginMemberId") == null) {
 		response.sendRedirect(request.getContextPath()+"/home.jsp");
 		return;
 	}
 	
+	//메시지
+	String msg = "";
+
 	//2.요청값 유효성검사
-	if(request.getParameter("beforelocalName") == null){
-		response.sendRedirect(request.getContextPath()+"/board/updateLocalForm.jsp");
+	if(request.getParameter("newLocal") == null ||
+		request.getParameter("newLocal").equals("")){
+		msg = URLEncoder.encode("수정할 카테고리명을 입력해주세요.","utf-8");
+		response.sendRedirect(request.getContextPath()+"/board/updateLocalForm.jsp?msg=" + msg);
 		return;
 		}
 	
@@ -25,10 +33,7 @@
 		System.out.println(newLocal + "<- 카테고리수정 액션 newLocal");
 		System.out.println(newLocalRe + "<- 카테고리수정 액션 newLocalRe");
 		System.out.println(localName + "<- 카테고리수정 액션 localName");
-		
-	//메시지
-	String msg = "";
-	
+
 	// 지역명 일치 검사
 	if(!newLocal.equals(newLocalRe)){//지역명 오류
 		System.out.println("지역명 오류");

@@ -68,14 +68,14 @@
 	
 	String homeBoardSql = ""; //null 대신 ""  null은 . equals가 불가함 
 	if(localName.equals("전체")) {// where삭제
-		homeBoardSql="SELECT board_no boardNo, local_name localName, board_title boardTitle, board_content boardContent, member_id memberId, createdate FROM board ORDER BY createdate DESC LIMIT ?, ?";
+		homeBoardSql="SELECT board_no boardNo, local_name localName, board_title boardTitle, board_content boardContent, member_id memberId, createdate FROM board ORDER BY createdate DESC, boardNo DESC LIMIT ?, ?";
 		homeBoardStmt = conn.prepareStatement(homeBoardSql);
 			System.out.println(homeBoardStmt+"<--homeBoardStmt if");
 		homeBoardStmt.setInt(1, startRow);
 		homeBoardStmt.setInt(2, rowPerPage);
 
 	} else {
-		homeBoardSql="SELECT board_no boardNo, local_name localName, board_title boardTitle, board_content boardContent, member_id memberId, createdate FROM board WHERE local_name = ? ORDER BY createdate DESC LIMIT ?, ?";
+		homeBoardSql="SELECT board_no boardNo, local_name localName, board_title boardTitle, board_content boardContent, member_id memberId, createdate FROM board WHERE local_name = ? ORDER BY createdate DESC, boardNo DESC LIMIT ?, ?";
 		homeBoardStmt = conn.prepareStatement(homeBoardSql);
 		homeBoardStmt.setString(1, localName);
 		homeBoardStmt.setInt(2, startRow);
@@ -157,23 +157,21 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>UserBoard</title>
+	<title>TravelFlow</title>
+	<link href="img/boardfavicon.png" rel="icon">
 	<!-- Latest compiled and minified CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">		
 	<style>
-	
 	.page-item.active .page-link {
 	 z-index: 1;
 	 color: #555;
 	 background-color: #FAECC5;
 	 border-color: #ccc;
-	 
 	}
 	.page-link:focus .page-link:hover {
 	  color: #ccc;
 	  background-color: pink; 
 	  color: #555;
-	  
 	}
 </style>
 </head>
@@ -259,13 +257,13 @@
 	<div>
       <jsp:include page="/inc/mainmenu2.jsp"></jsp:include>
 	</div>
-<!-- 카테고리별 게시글 5개씩 -->
+<!-- 카테고리별 게시글 10개씩 -->
 	<table class="table table-bordered">
 		<tr class="table-warning">
-			<td style="width: 20%">지역</td>
+			<td style="width: 10%">지역</td>
 			<td style="width: 30%">제목</td>
-			<td>내용</td>
-			<td>작성자</td>
+			<td style="width: 40%">내용</td>
+			<td style="width: 10%">작성자</td>
 			<td>작성일</td>
 		</tr>
         <%
@@ -276,7 +274,20 @@
 			<td>
 				<a href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=b.getBoardNo()%>" style="text-decoration: none; color: #1266FF">
 				<%=b.getBoardTitle()%></a></td>
-			<td><%=b.getBoardContent().substring(0,7)%></td>
+			<td><!-- 50자 이하에 내용은 리스트에서 전체 다 보여주고 이상은 50자까지만 보여줌 -->
+				<%
+					if(b.getBoardContent().length() < 30) {
+				%>
+					<%=b.getBoardContent()%>
+				<%		
+					} else {
+				%>		
+						<%=b.getBoardContent().substring(0,30)%>
+				<%		
+						// System.out.println(b.getBoardContent().length() + "-->b.getBoardContent().length()");
+					}
+				%>
+			</td>
 			<td><%=b.getMemberId()%></td>
 			<td><%=b.getCreatedate().substring(0,10)%></td>
 			</tr>
@@ -335,10 +346,10 @@
 		%>
 	</ul>
 	</div>
-	<div>
-      <!-- include 페이지 : Copyright &copy; 구디아카데미 -->
-      <jsp:include page="/inc/copyright.jsp"></jsp:include>
-   </div>
+</div>
+<div>
+	<!-- include 페이지 : Copyright &copy; 신정음 -->
+	<jsp:include page="/inc/copyright.jsp"></jsp:include>
 </div>
 </body>
 </html>

@@ -52,10 +52,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>UserBoard</title>
+	<title>TravelFlow</title>
+	<link href="<%=request.getContextPath()%>/img/boardfavicon.png" rel="icon">
 	<!-- Latest compiled and minified CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	
 	<!-- Latest compiled JavaScript -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -84,7 +84,8 @@
 			<tr>
 				<td class="table-warning">현재 댓글</td>
 				<td>
-					<input type="text" name="commentNo" hidden="hidden" value="<%=comment.getCommentNo()%>">
+					<input type="hidden" name="commentNo" value="<%=comment.getCommentNo()%>">
+					<input type="hidden" name="boardNo" value="<%=comment.getBoardNo()%>">
 					<input type ="text" name="comment" value="<%=comment.getCommentContent()%>" class="form-control form-control-sm" readonly>
 					</td>
 			</tr>
@@ -96,6 +97,10 @@
 		<a href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=comment.getBoardNo()%>" class="btn btn-sm btn-outline-dark">취소</a>
 		<button type="submit" class="btn btn-sm btn-outline-dark">수정</button>
 	</form>
+</div>
+<div>
+	<!-- include 페이지 : Copyright &copy; 신정음 -->
+	<jsp:include page="/inc/copyright.jsp"></jsp:include>
 </div>
 </body>
 </html>

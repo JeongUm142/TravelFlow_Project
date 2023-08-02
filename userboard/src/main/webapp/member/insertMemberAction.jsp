@@ -3,11 +3,18 @@
 <%@ page import = "java.net.*"%>
 <%@ page import = "vo.*" %>
 <%
+	//인코딩 설정
+	request.setCharacterEncoding("utf-8");
+
 	//1.세션 유효성검사 
 	if(session.getAttribute("loginMemberId") != null) {
 		response.sendRedirect(request.getContextPath()+"/home.jsp");
 		return;
 	}
+	
+	//메시지
+	String msg = "";
+	
 	//2.요청값 유효성검사
 	if(request.getParameter("memberId")==null ||
 		request.getParameter("memberPw")==null ||
@@ -15,7 +22,8 @@
 		request.getParameter("memberId").equals("") ||
 		request.getParameter("memberPw").equals("") ||
 		request.getParameter("memberPwRe").equals("")) {
-		response.sendRedirect(request.getContextPath()+"/member/insertMemberForm.jsp");
+		msg = URLEncoder.encode("아이디와 비밀번호를 입력해주세요.", "utf-8");
+		response.sendRedirect(request.getContextPath()+"/member/insertMemberForm.jsp?msg=" + msg);
 		return;
 		}
 
@@ -26,9 +34,6 @@
 		System.out.println(memberId + "<- 회원가입 memberId");
 		System.out.println(memberPw + "<- 회원가입 memberPw");
 		System.out.println(memberPwRe + "<- 회원가입 memberPwRe");
-		
-	//메시지
-	String msg = "";
 	
 	// 비밀번호 일치 검사
 	if(!memberPw .equals(memberPwRe)) { //비밀번호 오류

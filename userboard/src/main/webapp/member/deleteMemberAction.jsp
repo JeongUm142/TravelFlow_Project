@@ -3,6 +3,9 @@
 <%@ page import = "java.net.*"%>
 <%@ page import = "vo.*" %>
 <%
+	//인코딩 설정
+	request.setCharacterEncoding("utf-8");
+
 	//1.세션 유효성검사 
 	if(session.getAttribute("loginMemberId") == null) {
 		response.sendRedirect(request.getContextPath()+"/home.jsp");
@@ -42,7 +45,7 @@
 	int row = stmt.executeUpdate();
 	if(row == 1) {//성공 
 		System.out.println(row + "<--탈퇴성공");
-		msg = URLEncoder.encode("지금까지 저희 서비스를 이용해주셔서 감사합니다.","utf-8");
+		msg = URLEncoder.encode("지금까지 이용해주셔서 감사합니다.","utf-8");
 		session.invalidate();//세션무효화
 		response.sendRedirect(request.getContextPath()+"/home.jsp?msg="+msg);
 	} else {
